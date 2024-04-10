@@ -9,9 +9,7 @@ function App() {
     <Box className={classes.background}>
       <CitiesButton />
       <Search />
-      <div>
         <TimeAndLocation />
-      </div>
     </Box>
   );
 }

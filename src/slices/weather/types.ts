@@ -1,6 +1,6 @@
 export interface Coordinates {
   lat: number;
-  long: number;
+  lon: number;
 }
 export interface Weather {
   main: string;
@@ -62,4 +62,15 @@ export interface Daily {
     wind_speed: number;
     temp: Temp;
     weather: HourWeather;
+}
+
+export interface ForecastWeather {
+    hourly: Hour;
+    daily: Daily;
+}
+
+
+export interface WeatherState {
+  current: CurrentWeather | null;
+  forecast: ForecastWeather | null;
 }
