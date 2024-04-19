@@ -1,22 +1,22 @@
 export const CITIES = [
     {
       id: 1,
-      title: "London",
+      title: "Chennai",
     },
     {
       id: 2,
-      title: "Sydney",
+      title: "Coimbatore",
     },
     {
       id: 3,
-      title: "Tokyo",
+      title: "Delhi",
     },
     {
       id: 4,
-      title: "Toronto",
+      title: "Mumbai",
     },
     {
       id: 5,
-      title: "Paris",
+      title: "Bangalore",
     },
   ];

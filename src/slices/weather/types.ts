@@ -8,7 +8,7 @@ export interface Weather {
   icon: string;
 }
 export interface Main {
-  tenp: number;
+  temp: number;
   feels_like: number;
   temp_max: number;
   temp_min: number;
@@ -26,12 +26,11 @@ export interface Sys {
 
 export interface CurrentWeather {
     coord: Coordinates;
-    weather: Weather;
+    weather: Weather[];
     main: Main;
     wind: Wind;
     sys: Sys;
     dt: number;
-    timezone: number;
     name: string;
 }
 
@@ -40,7 +39,11 @@ export interface HourWeather {
     description: string;
     icon: string;
 }
-
+export interface Temp {
+  day: number;
+  min: number;
+  max: number;
+}
 export interface Hour {
     dt: number;
     temp: number;
@@ -48,7 +51,7 @@ export interface Hour {
     pressure: number;
     humidity: number;
     wind_speed: number; 
-    weather: HourWeather
+    weather: HourWeather[]
 }
 export interface Temp {
     day: number;
@@ -61,16 +64,18 @@ export interface Daily {
     humidity: number;
     wind_speed: number;
     temp: Temp;
-    weather: HourWeather;
+    weather: HourWeather[];
 }
 
 export interface ForecastWeather {
-    hourly: Hour;
-    daily: Daily;
+    hourly: Hour[];
+    daily: Daily[];
+    timezone: string
 }
 
 
 export interface WeatherState {
   current: CurrentWeather | null;
   forecast: ForecastWeather | null;
+  unit: string;
 }

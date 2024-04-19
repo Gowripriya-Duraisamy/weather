@@ -1,17 +1,19 @@
 import { CardContent, Typography } from "@mui/material";
-import { DateTime } from "luxon";
+import { useSelector } from "../store";
+import { formatToLocalTime } from "../slices/weather";
 
 const TimeAndLocation = () => {
+  const {current, forecast} = useSelector(state => state.weather);
     return (
       <>
         <CardContent>
           <Typography>
-            {DateTime.now().toFormat("cccc, dd LLL yyyy' | Local time: 'hh:mm a")}
+            {!!current?.dt && !!forecast?.timezone &&formatToLocalTime(current?.dt, forecast?.timezone)}
           </Typography>
         </CardContent>
   
-        <CardContent className="flex items-center justify-center my-3">
-          <Typography className="text-white text-3xl font-medium">name</Typography>
+        <CardContent>
+          <Typography>{current?.name}, {current?.sys.country}</Typography>
       </CardContent>
       </>)
 }
