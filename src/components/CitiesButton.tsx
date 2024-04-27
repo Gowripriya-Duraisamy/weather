@@ -2,6 +2,7 @@ import { Button, CardContent } from "@mui/material";
 import { CITIES } from "../constants";
 import { useDispatch, useSelector } from "../store";
 import { getWeather } from "../slices/weather";
+import classes from "./Cities.module.css"
 
 export const CitiesButton = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ export const CitiesButton = () => {
     <CardContent>
       {CITIES.map((city) => {
         return (
-          <Button key={city.id} onClick={() => handleButtonClick(city.title)}>
+          <Button className={classes.button} key={city.id} onClick={() => handleButtonClick(city.title)}>
             {city.title}
           </Button>
         );

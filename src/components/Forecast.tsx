@@ -20,7 +20,7 @@ const ForeCast: FC<Forecastprops> = ({ hour,daily, title, timezone }) => {
         {hour?.map((val, index) => {
           return <Grid key={index} item>
             <Typography>{formatToLocalTime(val.dt, timezone, 'hh:mma')}</Typography>
-             <img src={convertToIcon(val.weather[0].icon || '')}></img>
+             <img key={index} alt={"forecast"} src={convertToIcon(val.weather[0].icon || '')}></img>
              <Typography>{val.temp}°</Typography>
           </Grid>;
         })}
@@ -29,7 +29,7 @@ const ForeCast: FC<Forecastprops> = ({ hour,daily, title, timezone }) => {
         {daily?.map((val, index) => {
           return <Grid key={index} item>
             <Typography>{formatToLocalTime(val.dt, timezone, 'ccc')}</Typography>
-             <img src={convertToIcon(val.weather[0].icon || '')}></img>
+             <img key={index} alt={"forecast"} src={convertToIcon(val.weather[0].icon || '')}></img>
              <Typography>{val.temp.day}°</Typography>
           </Grid>;
         })}
