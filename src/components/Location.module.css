@@ -1,0 +1,10 @@
+.timeFont {
+    color: #eeeded;
+    font-weight: 100;
+}
+
+.locationFont {
+    color: white;
+    font-weight: bold;
+    font-size: larger;
+}

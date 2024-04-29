@@ -1,0 +1,42 @@
+.weatherFont {
+    color:#33fdfd
+}
+
+.weatherContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 9rem;
+}
+
+.temp {
+    font-weight: bold;
+    font-size: xx-large;
+    color: white;
+}
+
+.dayDetails {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.icon {
+    justify-content: center;
+    align-items: center;
+    color: white
+    
+}
+
+.detailFont {
+    color: white;
+    padding: 0px 8px;
+    display: inline;
+    font-size: small;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+}

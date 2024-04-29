@@ -1,13 +1,8 @@
-.inputContainer {
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-}
-
 .button {
     background-color: transparent;
     border: none;
     display: inline;
+    color: white;
 }
 
 .button:hover {
@@ -22,11 +17,19 @@
     display: inline;
 }
 
-.outerContainer{
-    
-}
-
 .input {
     background: white;
     border: none;
+    padding: 2px 8px;
+}
+
+.outerContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.firstContainer {
+    display: flex;
+    justify-content: flex-end;
 }
