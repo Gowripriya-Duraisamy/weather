@@ -1,4 +1,28 @@
 .divider {
     width: 100%;
-    background: white;
+    background: #efefef;
+    height: 1px;
+}
+
+.titleFont {
+    color: white;
+    padding: 8px 0;
+    font-size: 15px;
+}
+
+.forecastContainer {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.timeFont {
+    font-size: small;
+    color: #ffffff;
+}
+
+.img {
+    width: 80px;
 }

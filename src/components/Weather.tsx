@@ -1,6 +1,6 @@
 import { Box, CardContent, Grid, Typography } from "@mui/material";
 import { useSelector } from "../store";
-import { convertToIcon } from "../slices/weather";
+import { convertToIcon, formatToLocalTime } from "../slices/weather";
 import {
   Thermostat,
   Water,
@@ -11,10 +11,9 @@ import {
   ArrowDownward,
 } from "@mui/icons-material";
 import classes from "./Weather.module.css";
-import { color } from "@mui/system";
 
 const Weather = () => {
-  const { current } = useSelector((state) => state.weather);
+  const { current, forecast } = useSelector((state) => state.weather);
   return (
     <>
       <CardContent>
@@ -24,7 +23,7 @@ const Weather = () => {
       </CardContent>
       <Grid container className={classes.weatherContainer}>
         <Grid item xs={5}>
-          <img src={convertToIcon(current?.weather[0].icon || "")}></img>
+          <img alt={"weather"} src={convertToIcon(current?.weather[0].icon || "")}></img>
         </Grid>
         <Grid item xs={3}>
           <Typography className={classes.temp}>
@@ -57,29 +56,29 @@ const Weather = () => {
           <span className={classes.box}>
             <LightMode className={classes.icon} />
             <Typography className={classes.detailFont}>
-              {" "}
-              Rise: {current?.sys.sunrise} |{" "}
+            
+              Rise: {!!current && !!forecast  && formatToLocalTime(current.sys.sunrise, forecast.timezone, 'hh:mma')} 
             </Typography>
+            <Typography className={classes.seperate}> | </Typography>
           </span>
           <span className={classes.box}>
             <WbTwilight className={classes.icon} />
             <Typography className={classes.detailFont}>
-              {" "}
-              Set: {current?.sys.sunset} |
+              Set: {!!current && !!forecast  && formatToLocalTime(current.sys.sunset, forecast.timezone, 'hh:mma')}
             </Typography>
+            <Typography className={classes.seperate}> | </Typography>
           </span>
           <span className={classes.box}>
             <ArrowUpward className={classes.icon} />
             <Typography className={classes.detailFont}>
-              {" "}
-              High: {current?.main.temp_max} |
+              High: {current?.main.temp_max}
             </Typography>
+            <Typography className={classes.seperate}> | </Typography>
           </span>
           <span className={classes.box}>
             <ArrowDownward className={classes.icon} />
             <Typography className={classes.detailFont}>
-              {" "}
-              Low: {current?.main.temp_min}{" "}
+              Low: {current?.main.temp_min}
             </Typography>
           </span>
         </Box>

@@ -25,13 +25,13 @@
 .icon {
     justify-content: center;
     align-items: center;
-    color: white
-    
+    color: white;
+    font-size: 20px;
 }
 
 .detailFont {
     color: white;
-    padding: 0px 8px;
+    padding: 0px 6px;
     display: inline;
     font-size: small;
 }
@@ -39,4 +39,11 @@
 .box {
     display: flex;
     align-items: center;
+}
+
+.seperate {
+    font-size: medium;
+    color: white;
+    padding: 0px 4px;
+    display: inline;
 }
