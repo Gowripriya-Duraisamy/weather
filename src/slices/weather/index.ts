@@ -9,7 +9,8 @@ const appId = process.env.REACT_APP_API_KEY;
 const initialState: WeatherState = {
   current: null,
   forecast: null,
-  unit: "metric"
+  unit: "metric",
+  city: ""
 };
 
 const slice = createSlice({
@@ -27,10 +28,21 @@ const slice = createSlice({
     },
     changeUnits(state: WeatherState, action: PayloadAction<string>) {
       state.unit = action.payload;
+    },
+    changeCity(state: WeatherState, action: PayloadAction<string>) {
+      state.city = action.payload;
     }
   },
 });
 export const reducer = slice.reducer;
+
+export const changeCity = (city: string): AppThunk => (dispatch) => {
+  dispatch(slice.actions.changeCity(city));
+}
+
+export const changeUnits = (unit: string): AppThunk => (dispatch) => {
+  dispatch(slice.actions.changeUnits(unit));
+}
 
 export const getWeather =
   (city: string, unit: string): AppThunk =>

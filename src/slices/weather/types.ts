@@ -78,4 +78,5 @@ export interface WeatherState {
   current: CurrentWeather | null;
   forecast: ForecastWeather | null;
   unit: string;
+  city: string;
 }

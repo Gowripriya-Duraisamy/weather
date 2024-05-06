@@ -19,7 +19,7 @@ const ForeCast: FC<Forecastprops> = ({ hour,daily, title, timezone }) => {
       <Grid container >
         {hour?.map((val, index) => {
           return <Grid key={index} item className={classes.forecastContainer}>
-            <Typography className={classes.timeFont}>{formatToLocalTime(val.dt, timezone, 'hh:mma')}</Typography>
+            <Typography className={classes.timeFont}>{formatToLocalTime(val.dt, timezone, 'hh:mm a')}</Typography>
              <img className={classes.img} key={index} alt={"forecast"} src={convertToIcon(val.weather[0].icon || '')}></img>
              <Typography className={classes.timeFont}>{val.temp.toFixed()}°</Typography>
           </Grid>;

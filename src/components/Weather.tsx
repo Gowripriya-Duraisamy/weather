@@ -57,28 +57,28 @@ const Weather = () => {
             <LightMode className={classes.icon} />
             <Typography className={classes.detailFont}>
             
-              Rise: {!!current && !!forecast  && formatToLocalTime(current.sys.sunrise, forecast.timezone, 'hh:mma')} 
+              Rise: {!!current && !!forecast  && formatToLocalTime(current.sys.sunrise, forecast.timezone, 'hh:mm a')} 
             </Typography>
             <Typography className={classes.seperate}> | </Typography>
           </span>
           <span className={classes.box}>
             <WbTwilight className={classes.icon} />
             <Typography className={classes.detailFont}>
-              Set: {!!current && !!forecast  && formatToLocalTime(current.sys.sunset, forecast.timezone, 'hh:mma')}
+              Set: {!!current && !!forecast  && formatToLocalTime(current.sys.sunset, forecast.timezone, 'hh:mm a')}
             </Typography>
             <Typography className={classes.seperate}> | </Typography>
           </span>
           <span className={classes.box}>
             <ArrowUpward className={classes.icon} />
             <Typography className={classes.detailFont}>
-              High: {current?.main.temp_max}
+              High: {current?.main.temp_max.toFixed()}°
             </Typography>
             <Typography className={classes.seperate}> | </Typography>
           </span>
           <span className={classes.box}>
             <ArrowDownward className={classes.icon} />
             <Typography className={classes.detailFont}>
-              Low: {current?.main.temp_min}
+              Low: {current?.main.temp_min.toFixed()}°
             </Typography>
           </span>
         </Box>

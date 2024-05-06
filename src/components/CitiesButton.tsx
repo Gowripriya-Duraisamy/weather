@@ -1,7 +1,7 @@
 import { Button, CardContent } from "@mui/material";
 import { CITIES } from "../constants";
 import { useDispatch, useSelector } from "../store";
-import { getWeather } from "../slices/weather";
+import { changeCity, getWeather } from "../slices/weather";
 import classes from "./Cities.module.css"
 
 export const CitiesButton = () => {
@@ -9,6 +9,7 @@ export const CitiesButton = () => {
   const unit = useSelector(state => state.weather.unit);
 
   const handleButtonClick = (name: string) => {
+    dispatch(changeCity(name))
     dispatch(getWeather(name, unit));
   };
   return (
