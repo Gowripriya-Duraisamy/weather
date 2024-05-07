@@ -70,7 +70,7 @@ export interface Daily {
 export interface ForecastWeather {
     hourly: Hour[];
     daily: Daily[];
-    timezone: string
+    timezone: string;
 }
 
 

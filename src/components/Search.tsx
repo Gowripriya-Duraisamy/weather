@@ -2,7 +2,7 @@ import { Button, Grid, IconButton, TextField, Typography } from "@mui/material";
 import { SearchOutlined, LocationOn } from "@mui/icons-material/";
 import classes from "./Search.module.css";
 import { useDispatch, useSelector } from "../store";
-import { changeCity, changeUnits, getWeather } from "../slices/weather";
+import { changeCity, changeUnits, getForecast, getWeather } from "../slices/weather";
 import { ChangeEvent, useState } from "react";
 
 export const Search = () => {
@@ -19,6 +19,16 @@ export const Search = () => {
     setName(event.target.value);
   };
 
+  const handleLocationClick = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        let lat = position.coords.latitude;
+        let lon = position.coords.longitude;
+        dispatch(getForecast(lat, lon, unit))
+      });
+    }
+  }
+
   const handleSearch = () => {
     dispatch(changeCity(name));
     setName("");
@@ -29,6 +39,7 @@ export const Search = () => {
     <Grid container spacing={2} className={classes.outerContainer}>
       <Grid item xs={7} className={classes.firstContainer}>
         <TextField
+          value={name}
           placeholder="search location"
           variant="standard"
           className={classes.input}
@@ -38,11 +49,11 @@ export const Search = () => {
           }}
         />
 
-        <IconButton>
-          <SearchOutlined style={{ color: "white" }} onClick={handleSearch} />
+        <IconButton onClick={handleSearch}>
+          <SearchOutlined style={{ color: "white" }}  />
         </IconButton>
-        <IconButton>
-          <LocationOn style={{ color: "white" }} />
+        <IconButton onClick={handleLocationClick}>
+          <LocationOn style={{ color: "white" }}  />
         </IconButton>
       </Grid>
       <Grid item xs={5}>

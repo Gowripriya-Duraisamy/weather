@@ -10,7 +10,7 @@ const initialState: WeatherState = {
   current: null,
   forecast: null,
   unit: "metric",
-  city: ""
+  city: "",
 };
 
 const slice = createSlice({
@@ -31,18 +31,50 @@ const slice = createSlice({
     },
     changeCity(state: WeatherState, action: PayloadAction<string>) {
       state.city = action.payload;
-    }
+    },
   },
 });
 export const reducer = slice.reducer;
 
-export const changeCity = (city: string): AppThunk => (dispatch) => {
-  dispatch(slice.actions.changeCity(city));
-}
+export const changeCity =
+  (city: string): AppThunk =>
+  (dispatch) => {
+    dispatch(slice.actions.changeCity(city));
+  };
 
-export const changeUnits = (unit: string): AppThunk => (dispatch) => {
-  dispatch(slice.actions.changeUnits(unit));
-}
+export const changeUnits =
+  (unit: string): AppThunk =>
+  (dispatch) => {
+    dispatch(slice.actions.changeUnits(unit));
+  };
+
+export const getForecast =
+  (lat: number, lon: number, unit: string): AppThunk =>
+  async (dispatch) => {
+    try {
+      const locationData = await axios.get<any>(
+        `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${appId}`
+      );
+      if (locationData.data.length > 0) {
+        const response = await axios.get<CurrentWeather>(
+          `http://api.openweathermap.org/data/2.5/weather?q=${locationData.data[0].name}&units=${unit}&appid=${appId}`
+        );
+          if (response.data) {
+            const coord = response.data.coord;
+            const exclude = "minutely,current";
+            const foreCastResponse = await axios.get<ForecastWeather>(
+              `https://api.openweathermap.org/data/3.0/onecall?lat=${coord.lat}&lon=${coord.lon}&units=${unit}&exclude=${exclude}&appid=${appId}`
+            );
+    
+            dispatch(slice.actions.currentWeather(response.data));
+            !!foreCastResponse.data &&
+              dispatch(slice.actions.forecastWeather(foreCastResponse.data));
+          }
+      }
+    } catch (error) {
+      console.log("An error occured on fetching data", error);
+    }
+  };
 
 export const getWeather =
   (city: string, unit: string): AppThunk =>
@@ -54,7 +86,7 @@ export const getWeather =
       );
       if (response.data) {
         const coord = response.data.coord;
-        const exclude = "minutely";
+        const exclude = "minutely,current";
         const foreCastResponse = await axios.get<ForecastWeather>(
           `https://api.openweathermap.org/data/3.0/onecall?lat=${coord.lat}&lon=${coord.lon}&units=${unit}&exclude=${exclude}&appid=${appId}`
         );
@@ -75,5 +107,5 @@ export const formatToLocalTime = (
 ) => DateTime.fromSeconds(secs).setZone(zone).toFormat(format);
 
 export const convertToIcon = (val: string) => {
-  return `http://openweathermap.org/img/wn/${val}@2x.png`
-}
+  return `http://openweathermap.org/img/wn/${val}@2x.png`;
+};
