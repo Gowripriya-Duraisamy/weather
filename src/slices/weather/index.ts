@@ -57,7 +57,7 @@ export const getForecast =
       );
       if (locationData.data.length > 0) {
         const response = await axios.get<CurrentWeather>(
-          `http://api.openweathermap.org/data/2.5/weather?q=${locationData.data[0].name}&units=${unit}&appid=${appId}`
+          `https://api.openweathermap.org/data/2.5/weather?q=${locationData.data[0].name}&units=${unit}&appid=${appId}`
         );
           if (response.data) {
             const coord = response.data.coord;
@@ -82,7 +82,7 @@ export const getWeather =
     // Your asynchronous logic here
     try {
       const response = await axios.get<CurrentWeather>(
-        `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=${unit}&appid=${appId}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${unit}&appid=${appId}`
       );
       if (response.data) {
         const coord = response.data.coord;
@@ -107,5 +107,5 @@ export const formatToLocalTime = (
 ) => DateTime.fromSeconds(secs).setZone(zone).toFormat(format);
 
 export const convertToIcon = (val: string) => {
-  return `http://openweathermap.org/img/wn/${val}@2x.png`;
+  return `https://openweathermap.org/img/wn/${val}@2x.png`;
 };
